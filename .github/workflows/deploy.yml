@@ -16,13 +16,14 @@ runs-on: ubuntu-latest
 steps:
 - name: Checkout Code
 uses: actions/checkout@v4
-- name: Check HTML File
+ name: Check HTML File
 run: test -f index.html
-- name: Validate HTML Content
+ name: Validate HTML Content
 run: |
 grep -qi "<html" index.html
 grep -qi "<h1" index.html
 grep -qi "</html>" index.html
+
 - name: CI Successful
 run: echo "HTML validation passed"
 deploy:
@@ -35,12 +36,12 @@ url: ${{ steps.deployment.outputs.page_url }}
 steps:
 - name: Checkout Code
 uses: actions/checkout@v4
-- name: Configure Pages
+name: Configure Pages
 uses: actions/configure-pages@v5
-- name: Upload Website
+name: Upload Website
 uses: actions/upload-pages-artifact@v3
 with:
 path: .
-- name: Deploy to GitHub Pages
+name: Deploy to GitHub Pages
 id: deployment
 uses: actions/deploy-pages@v4
